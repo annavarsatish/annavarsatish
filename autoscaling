@@ -1,0 +1,52 @@
+						REGULARAUTOSCALING 
+autoscaling helps to scaleup or scaledown based on load or schedule
+===========================================================================================
+load means the cpu %age if the cpu --> 80% continuously like 15-30 min  | 
+cpu --> 80% ---------------> policy ------> to start a new server	 |
+cpu --> 20% ---------------> policy ------> to stop a server		  |
+==============================================================================================
+scheduled means if we are working with like zomato or domnios in weekend we need more
+server then usual days 
+ex: weekdays ----> 4 servers mon-fri
+    weekends ----> 8 severs sat -6am
+====================================================================================================
+here  we are adding the servers according to the load or schedule but the question is which type of 
+servers it must be created. this will be specified in LC or LT
+================================================================================================= 
+to create a server we require
+1.AMI
+2.TYPE
+3.KEY PAIR
+4.USER DATA
+=====================================================================================================
+Launch configuration   			vs     			Launch Template 
+In LC we don't have versions					In LT we have versions in a one template
+we have to create different LC					we can create any versions ina one template	
+LC1,LC2,LC3 							LT -v1,LT -v2	
+===============================================================================================================
+create an AMI of our server with nginx,tomcat present in it
+create an LT
+create an Lc
+To create an autoscaling in AS attach the LT
+choose AZ
+attach the LB we created
+choose
+desire capicty
+min size
+max size
+and create actoscaling
+================================================================================================================
+if you go to instances if can see the autoscaling creates the two new servers
+ if we stop any server the auto scaling will terminates the server and create a new server
+to over come it will specific the go to autoscaling and select it
+edit we have to select suspendedstress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10s processes we have many options in it
+===================================================================================================================
+yum install stress
+if we get no package available
+yum install epel-release
+we get amazon command to install epel
+install it 
+yum install stress
+man stress
+stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 10000s
+
